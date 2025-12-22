@@ -118,7 +118,8 @@ export async function POST(req: Request) {
       async start(controller) {
         try {
           for await (const chunk of completion) {
-            const token = chunk.choices[0]?.delta?.content;
+            const c = chunk as { choices: { delta?: { content?: string } }[] };
+            const token = c.choices[0]?.delta?.content;
             if (token) {
               controller.enqueue(new TextEncoder().encode(token));
             }

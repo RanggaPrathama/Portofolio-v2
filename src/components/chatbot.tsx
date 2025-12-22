@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { Send, Bot, User, Loader2, Trash2 } from "lucide-react";
 import type { Messages } from "@/types/chatbot";
+import ReactMarkdown from "react-markdown";
 
 const SUGGESTED_QUESTIONS = [
   "What are your main skills?",
@@ -145,7 +146,7 @@ export function ChatBot() {
   return (
     <div className="flex flex-col h-[calc(100dvh-120px)] w-full max-w-3xl mx-auto">
       {/* Messages Area - Scrollable */}
-    <div className="px-3 sm:px-4 py-4 sm:py-6 border border-border/30 overflow-y-auto scrollbar-hide">
+      <div className="px-3 sm:px-4 py-4 sm:py-6 border border-border/30 overflow-y-auto scrollbar-hide">
         <div className="space-y-4">
           {/* Welcome message if no messages */}
           {messages.length === 0 && (
@@ -196,11 +197,13 @@ export function ChatBot() {
                     : "bg-muted/50 text-foreground"
                 )}
               >
-                <p className="whitespace-pre-wrap break-words">{message.content}</p>
+                <ReactMarkdown className="whitespace-pre-wrap break-words">
+                  {message.content}
+                </ReactMarkdown>
                 {message.role === "assistant" &&
                   message.content === "" &&
                   isLoading && (
-                    <span className="inline-block animate-pulse">▊</span>
+                    <span className="inline-block animate-pulse">▊ Thinking...</span>
                   )}
               </div>
             </div>
