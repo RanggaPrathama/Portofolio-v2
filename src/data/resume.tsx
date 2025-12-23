@@ -84,7 +84,7 @@ export const DATA = {
         "Developed and maintained RESTful APIs for Single Sign-On (SSO) integration using Keycloak. Built and optimized backend APIs for the Human Resource Information System (HRIS). Designed and implemented AI-powered services based on Large Language Models (LLMs) to enable intelligent features and workflow automation.",
     },
     {
-      company: "Airlangga University",
+      company: "Airlangga University DSID",
       href: "https://unair.ac.id",
       badges: ["Internship"],
       location: "Surabaya, Indonesia",
