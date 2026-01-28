@@ -107,7 +107,7 @@ export function ChatBot() {
         }
       }
     } catch (error) {
-      console.error("Error:", error);
+      //console.error("Error:", error);
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === assistantId

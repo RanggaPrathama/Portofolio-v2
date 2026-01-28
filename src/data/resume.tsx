@@ -96,14 +96,14 @@ export const DATA = {
         "Contributed to the modification and improvement of the campus mobile API infrastructure. Supported the development of digital systems for independent internship programs, ensuring reliability and scalability of internal services.",
     },
     {
-      company: "Airlangga University",
+      company: "Airlangga University DIPP",
       href: "https://unair.ac.id",
       badges: ["Internship"],
       location: "Surabaya, Indonesia",
       title: "Innovation & Educational Development Intern",
       logoUrl: "/unair.png",
-      start: "2022",
-      end: "2023",
+      start: "2023",
+      end: "2024",
       description:
         "Successfully supported academic data management by ensuring timely and accurate RPS data input. Improved data accuracy and quality, contributing to a more efficient and reliable educational data processing workflow.",
     },
@@ -111,11 +111,11 @@ export const DATA = {
 
   education: [
     {
-      school: "Universitas Airlangga",
+      school: "Airlangga University",
       href: "https://unair.ac.id",
       degree: "Bachelor's Degree in Informatics Engineering",
       logoUrl: "/unair.png",
-      start: "2021",
+      start: "2022",
       end: "Present",
     },
   ],
