@@ -10,7 +10,7 @@ export const DATA = {
   description: "Fullstack Developer & AI Enthusiast",
   summary:
     "I'm a passionate problem-solver with a knack for picking up new tech fast. As an [Informatics Engineering student from Universitas Airlangga](/#education), I've spent my time not just in classrooms but also building real-world solutions through various freelance projects. I'm an experienced full-stack developer proficient in back-end technologies like **Golang, Laravel, and Node.js**, and front-end frameworks such as **React, Vue.js, HTML, CSS, and Tailwind**. I thrive on new challenges and am always eager to apply my skills in innovative ways.",
-  avatarUrl: "/me.jpg",
+  avatarUrl: "/me.png",
   skills: [
     "React",
     "Next.js",
