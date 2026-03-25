@@ -19,10 +19,13 @@ export function HeroSection({
   logoComponent,
   children,
 }: LandingPageProps) {
-
   const hours = new Date().getHours();
   const greeting =
-    hours < 12 ? "Good morning" : hours < 18 ? "Good afternoon" : "Good evening";
+    hours < 12
+      ? "Good morning"
+      : hours < 18
+        ? "Good afternoon"
+        : "Good evening";
   return (
     <div className="flex flex-col items-center w-full gap-10 lg:gap-14">
       {/* Text area — centered */}
@@ -184,7 +187,7 @@ export function HeroSection({
               {/* Phone content */}
               <div className="px-2.5 pt-1 space-y-3">
                 <div className="flex items-center gap-2">
-                   {logoComponent || (
+                  {logoComponent || (
                     <div className="w-5 h-5 bg-primary rounded-md flex items-center justify-center">
                       <span className="text-primary-foreground font-bold text-xs">
                         R

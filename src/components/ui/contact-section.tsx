@@ -27,7 +27,7 @@ interface ContactSectionProps {
 
 export function ContactSection({ email, socials }: ContactSectionProps) {
   return (
-    <div className="relative w-[100vw] -ml-[calc(50vw-50%)] py-20 overflow-hidden">
+    <div className="relative w-[100vw] -ml-[calc(50vw-50%)] -mb-12 sm:-mb-24 pb-24 sm:pb-32 pt-16 sm:pt-20 overflow-hidden">
       {/* Subtle top/bottom borders */}
       {/* <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
@@ -35,15 +35,14 @@ export function ContactSection({ email, socials }: ContactSectionProps) {
       </div> */}
 
       <div className="absolute inset-0 pointer-events-none">
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-background via-blue-50/60 to-blue-100/40 dark:from-background dark:via-blue-950/20 dark:to-slate-950/40" /> */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-blue-50/60 to-blue-100/40 dark:from-transparent dark:via-transparent dark:to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent  to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent  to-transparent" />
       </div>
 
-
       {/* Radar background effect */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="relative flex h-[500px] w-full max-w-4xl flex-col items-center justify-center overflow-hidden opacity-20 dark:opacity-35">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none h-full">
+        <div className="relative flex h-full w-full max-w-4xl flex-col items-center justify-center overflow-hidden opacity-20 dark:opacity-35">
           {/* Row 1 - tech icons */}
           <div className="mx-auto w-full max-w-3xl px-4">
             <div className="flex w-full items-center justify-center space-x-10 md:justify-between md:space-x-0">
@@ -113,9 +112,7 @@ export function ContactSection({ email, socials }: ContactSectionProps) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
             </span>
-            <span className="text-sm text-background ">
-              Available for work
-            </span>
+            <span className="text-sm text-background ">Available for work</span>
           </motion.div>
 
           <motion.h2
