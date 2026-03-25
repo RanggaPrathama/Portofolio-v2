@@ -22,7 +22,7 @@ export default function Page() {
   return (
     <main className=" relative z-10 flex flex-col min-h-[100dvh] space-y-10">
       <section id="hero">
-        <div className="mx-auto w-full">
+        <div className="mx-auto w-full space-y-12 mb-6 ">
           <BlurFade delay={BLUR_FADE_DELAY}>
             <HeroSection
               title={`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
@@ -46,16 +46,14 @@ export default function Page() {
               }
               aboutSection={
                 <HyperTextParagraph
-                  text="I'm a passionate problem-solver with a knack for picking up new tech fast. As an Informatics Engineering student from Universitas Airlangga, I've spent my time not just in classrooms but also building real-world solutions through various freelance projects. I'm an experienced full-stack developer proficient in back-end technologies like Golang, Laravel, and Node.js, and front-end frameworks such as React, Vue.js, HTML, CSS, and Tailwind. I thrive on new challenges and am always eager to apply my skills in innovative ways."
+                  text="I'm a full-stack developer & Informatics Engineering student at Universitas Airlangga. I build real-world web solutions through freelance projects, leveraging modern tech like React, Node.js, Laravel, and Golang to tackle complex challenges."
                   highlightWords={[
-                    "Golang",
-                    "Laravel",
-                    "Node.js",
-                    "React",
-                    "Vue.js",
-                    "Tailwind",
                     "full-stack",
                     "Airlangga",
+                    "React",
+                    "Node.js",
+                    "Laravel",
+                    "Golang",
                   ]}
                   className="text-sm text-muted-foreground"
                 />
@@ -70,7 +68,7 @@ export default function Page() {
         </div>
       </section>
       <section id="work">
-        <div className="flex min-h-0 flex-col gap-y-3">
+        <div className="flex min-h-0 flex-col gap-y-5 py-6">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
             <h2 className="text-xl font-bold">Experience</h2>
           </BlurFade>
@@ -97,7 +95,7 @@ export default function Page() {
         </div>
       </section>
       <section id="education">
-        <div className="flex min-h-0 flex-col gap-y-3">
+        <div className="flex min-h-0 flex-col gap-y-5">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
             <h2 className="text-xl font-bold">Education</h2>
           </BlurFade>

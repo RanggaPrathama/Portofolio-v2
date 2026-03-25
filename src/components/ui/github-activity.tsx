@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GithubContributions } from "react-github-graph";
+import { GitHubCalendar } from 'react-github-calendar';
 import { FolderGit2, Award, Code2, GitCommit } from "lucide-react";
 
 interface StatCardProps {
@@ -98,7 +98,7 @@ export function GithubActivity({ username, stats }: GithubActivityProps) {
           </span>
         </div>
         <div className="w-full overflow-x-auto [&_*]:!bg-transparent [&_.react-github-graph]:!bg-transparent">
-          <GithubContributions
+          <GitHubCalendar
             username={username}
           />
         </div>

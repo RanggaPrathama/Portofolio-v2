@@ -1,8 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
+import {
+  Mail,
+  ArrowUpRight,
+  Code2,
+  Smartphone,
+  Palette,
+  Server,
+  Github as GithubIcon,
+  Database,
+} from "lucide-react";
 import Link from "next/link";
+import { Radar, IconContainer } from "./radar-effect";
 
 interface SocialLink {
   name: string;
@@ -17,13 +27,79 @@ interface ContactSectionProps {
 
 export function ContactSection({ email, socials }: ContactSectionProps) {
   return (
-    <div className="relative w-full py-16 overflow-hidden">
-      {/* Ambient glow */}
+    <div className="relative w-[100vw] -ml-[calc(50vw-50%)] py-20 overflow-hidden">
+      {/* Subtle top/bottom borders */}
+      {/* <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+      </div> */}
+
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-500/5 rounded-full blur-[100px]" />
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-background via-blue-50/60 to-blue-100/40 dark:from-background dark:via-blue-950/20 dark:to-slate-950/40" /> */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
       </div>
 
-      <div className="relative space-y-10">
+
+      {/* Radar background effect */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="relative flex h-[500px] w-full max-w-4xl flex-col items-center justify-center overflow-hidden opacity-20 dark:opacity-35">
+          {/* Row 1 - tech icons */}
+          <div className="mx-auto w-full max-w-3xl px-4">
+            <div className="flex w-full items-center justify-center space-x-10 md:justify-between md:space-x-0">
+              <IconContainer
+                text="Web Dev"
+                delay={0.2}
+                icon={<Code2 className="h-6 w-6 text-muted-foreground" />}
+              />
+              <IconContainer
+                delay={0.4}
+                text="Mobile"
+                icon={<Smartphone className="h-6 w-6 text-muted-foreground" />}
+              />
+              <IconContainer
+                text="Design"
+                delay={0.3}
+                icon={<Palette className="h-6 w-6 text-muted-foreground" />}
+              />
+            </div>
+          </div>
+          {/* Row 2 */}
+          <div className="mx-auto w-full max-w-md mt-6 px-4">
+            <div className="flex w-full items-center justify-center space-x-10 md:justify-between md:space-x-0">
+              <IconContainer
+                text="Backend"
+                delay={0.5}
+                icon={<Server className="h-6 w-6 text-muted-foreground" />}
+              />
+              <IconContainer
+                text="DevOps"
+                delay={0.8}
+                icon={<Database className="h-6 w-6 text-muted-foreground" />}
+              />
+            </div>
+          </div>
+          {/* Row 3 */}
+          <div className="mx-auto w-full max-w-3xl mt-6 px-4">
+            <div className="flex w-full items-center justify-center space-x-10 md:justify-between md:space-x-0">
+              <IconContainer
+                delay={0.6}
+                text="GitHub"
+                icon={<GithubIcon className="h-6 w-6 text-muted-foreground" />}
+              />
+              <IconContainer
+                delay={0.7}
+                text="API"
+                icon={<Code2 className="h-6 w-6 text-muted-foreground" />}
+              />
+            </div>
+          </div>
+          <Radar className="absolute -bottom-16" />
+          <div className="absolute bottom-0 z-[41] h-px w-full bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+        </div>
+      </div>
+
+      <div className="relative z-10 space-y-10">
         {/* Heading */}
         <div className="text-center space-y-4">
           <motion.div
@@ -31,13 +107,13 @@ export function ContactSection({ email, socials }: ContactSectionProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-background/80 backdrop-blur-sm px-4 py-1.5"
+            className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-foreground  dark:backdrop-blur-sm px-4 py-1.5"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
             </span>
-            <span className="text-sm text-muted-foreground">
+            <span className="text-sm text-background ">
               Available for work
             </span>
           </motion.div>

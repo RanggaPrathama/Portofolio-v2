@@ -40,7 +40,6 @@ export function ChatBot() {
 
   useEffect(() => {
     scrollToBottom();
-    console.log("Messages updated:", messages);
   }, [messages]);
 
   useEffect(() => {
@@ -154,7 +153,7 @@ export function ChatBot() {
           {messages.length === 0 && (
             <div className="flex gap-2 sm:gap-3">
               <Avatar className="h-7 w-7 sm:h-8 sm:w-8 shrink-0">
-                <AvatarImage src="/me.jpg" alt="Assistant" />
+                <AvatarImage src="/me.png" alt="Assistant" />
                 <AvatarFallback className="bg-primary/10">
                   <Bot className="h-3 w-3 sm:h-4 sm:w-4" />
                 </AvatarFallback>
@@ -180,7 +179,7 @@ export function ChatBot() {
               <Avatar className="h-7 w-7 sm:h-8 sm:w-8 shrink-0">
                 {message.role === "assistant" ? (
                   <>
-                    <AvatarImage src="/me.jpg" alt="Assistant" />
+                    <AvatarImage src="/me.png" alt="Assistant" />
                     <AvatarFallback className="bg-primary/10">
                       <Bot className="h-3 w-3 sm:h-4 sm:w-4" />
                     </AvatarFallback>
