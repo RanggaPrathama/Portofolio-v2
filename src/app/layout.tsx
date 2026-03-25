@@ -5,7 +5,7 @@ import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
-import './globals.css';
+import "./globals.css";
 import LightRaysWrapper from "@/components/light-rays-wrapper";
 
 const fontSans = FontSans({
@@ -58,8 +58,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
-          fontSans.variable
+          "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6 overflow-x-hidden",
+          fontSans.variable,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="light">

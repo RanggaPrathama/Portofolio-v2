@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
+import { Eye } from "lucide-react";
 
 interface Props {
   title: string;
@@ -26,6 +27,7 @@ interface Props {
     href: string;
   }[];
   className?: string;
+  onClick?: () => void;
 }
 
 export function ProjectCard({
@@ -39,29 +41,37 @@ export function ProjectCard({
   video,
   links,
   className,
+  onClick,
 }: Props) {
   return (
     <Card
       className={
-        "group relative flex flex-col overflow-hidden border border-border/40 bg-background/50 backdrop-blur-sm hover:border-border/80 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 ease-out h-full"
+        "group relative flex flex-col overflow-hidden border border-border/40 bg-background/50 backdrop-blur-sm hover:border-border/80 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 ease-out h-full cursor-pointer"
       }
+      onClick={onClick}
     >
       {/* Gradient top accent on hover */}
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-      <Link
-        href={href || "#"}
-        className={cn("block cursor-pointer overflow-hidden", className)}
-      >
+      <div className={cn("block overflow-hidden", className)}>
         {video && (
-          <video
-            src={video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="pointer-events-none mx-auto h-40 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-          />
+          <div className="relative overflow-hidden">
+            <video
+              src={video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="pointer-events-none mx-auto h-40 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+            {/* Hover badge */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300">
+              <div className="flex items-center gap-1.5 rounded-full bg-white/90 dark:bg-background/90 backdrop-blur-sm px-3 py-1.5 text-xs font-medium text-foreground shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <Eye className="w-3.5 h-3.5" />
+                Read More
+              </div>
+            </div>
+          </div>
         )}
         {image && (
           <div className="relative overflow-hidden">
@@ -72,17 +82,24 @@ export function ProjectCard({
               height={300}
               className="h-40 w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
-            {/* Gradient overlay on hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            {/* Hover badge */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-all duration-300">
+              <div className="flex items-center gap-1.5 rounded-full bg-white/90 dark:bg-background/90 backdrop-blur-sm px-3 py-1.5 text-xs font-medium text-foreground shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <Eye className="w-3.5 h-3.5" />
+                Read More
+              </div>
+            </div>
           </div>
         )}
-      </Link>
+      </div>
       <CardHeader className="px-3 pt-3">
         <div className="space-y-1.5">
           <CardTitle className="mt-1 text-base font-semibold tracking-tight transition-colors duration-300 group-hover:text-primary">
             {title}
           </CardTitle>
-          <time className="font-sans text-xs text-muted-foreground">{dates}</time>
+          <time className="font-sans text-xs text-muted-foreground">
+            {dates}
+          </time>
           <div className="hidden font-sans text-xs underline print:visible">
             {link?.replace("https://", "").replace("www.", "").replace("/", "")}
           </div>
@@ -108,7 +125,10 @@ export function ProjectCard({
       </CardContent>
       <CardFooter className="px-3 pb-3">
         {links && links.length > 0 && (
-          <div className="flex flex-row flex-wrap items-start gap-1.5">
+          <div
+            className="flex flex-row flex-wrap items-start gap-1.5"
+            onClick={(e) => e.stopPropagation()}
+          >
             {links?.map((link, idx) => (
               <Link href={link?.href} key={idx} target="_blank">
                 <Badge
