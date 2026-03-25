@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Send, Bot, User, Loader2, Trash2 } from "lucide-react";
 import type { Messages } from "@/types/chatbot";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const SUGGESTED_QUESTIONS = [
   "What are your main skills?",
@@ -39,6 +40,7 @@ export function ChatBot() {
 
   useEffect(() => {
     scrollToBottom();
+    console.log("Messages updated:", messages);
   }, [messages]);
 
   useEffect(() => {
@@ -101,8 +103,8 @@ export function ChatBot() {
             prev.map((msg) =>
               msg.id === assistantId
                 ? { ...msg, content: assistantContent }
-                : msg
-            )
+                : msg,
+            ),
           );
         }
       }
@@ -115,8 +117,8 @@ export function ChatBot() {
                 ...msg,
                 content: "Sorry, something went wrong. Please try again.",
               }
-            : msg
-        )
+            : msg,
+        ),
       );
     } finally {
       setIsLoading(false);
@@ -172,7 +174,7 @@ export function ChatBot() {
               key={message.id}
               className={cn(
                 "flex gap-2 sm:gap-3",
-                message.role === "user" ? "flex-row-reverse" : "flex-row"
+                message.role === "user" ? "flex-row-reverse" : "flex-row",
               )}
             >
               <Avatar className="h-7 w-7 sm:h-8 sm:w-8 shrink-0">
@@ -194,16 +196,79 @@ export function ChatBot() {
                   "max-w-[85%] sm:max-w-[80%] rounded-2xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm",
                   message.role === "user"
                     ? "bg-primary text-primary-foreground"
-                    : "bg-muted/50 text-foreground"
+                    : "bg-muted/50 text-foreground",
                 )}
               >
-                <ReactMarkdown className="whitespace-pre-wrap break-words">
+                <ReactMarkdown
+                  className="whitespace-pre-wrap break-words"
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    p: ({ children }) => (
+                      <p className="mb-1 last:mb-0">{children}</p>
+                    ),
+                    ul: ({ children }) => (
+                      <ul className="mb-1 ml-4 list-disc last:mb-0">
+                        {children}
+                      </ul>
+                    ),
+                    ol: ({ children }) => (
+                      <ol className="mb-1 ml-4 list-decimal last:mb-0">
+                        {children}
+                      </ol>
+                    ),
+                    li: ({ children }) => (
+                      <li className="mb-0.5">{children}</li>
+                    ),
+                    h1: ({ children }) => (
+                      <h1 className="mb-1 font-bold">{children}</h1>
+                    ),
+                    h2: ({ children }) => (
+                      <h2 className="mb-1 font-bold">{children}</h2>
+                    ),
+                    h3: ({ children }) => (
+                      <h3 className="mb-1 font-semibold">{children}</h3>
+                    ),
+                    strong: ({ children }) => (
+                      <strong className="font-semibold">{children}</strong>
+                    ),
+                    table: ({ children }) => (
+                      <div className="my-2 w-full overflow-x-auto rounded-lg border border-border/40">
+                        <table className="w-full text-left text-xs">
+                          {children}
+                        </table>
+                      </div>
+                    ),
+                    thead: ({ children }) => (
+                      <thead className="bg-muted/70 text-foreground/80">
+                        {children}
+                      </thead>
+                    ),
+                    tbody: ({ children }) => (
+                      <tbody className="divide-y divide-border/30">
+                        {children}
+                      </tbody>
+                    ),
+                    tr: ({ children }) => (
+                      <tr className="transition-colors hover:bg-muted/40">
+                        {children}
+                      </tr>
+                    ),
+                    th: ({ children }) => (
+                      <th className="px-3 py-2 font-semibold">{children}</th>
+                    ),
+                    td: ({ children }) => (
+                      <td className="px-3 py-2 align-top">{children}</td>
+                    ),
+                  }}
+                >
                   {message.content}
                 </ReactMarkdown>
                 {message.role === "assistant" &&
                   message.content === "" &&
                   isLoading && (
-                    <span className="inline-block animate-pulse">▊ Thinking...</span>
+                    <span className="inline-block animate-pulse">
+                      ▊ Thinking...
+                    </span>
                   )}
               </div>
             </div>

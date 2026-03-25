@@ -44,9 +44,12 @@ export const ResumeCard = ({
       className="block cursor-pointer"
       onClick={handleClick}
     >
-      <Card className="flex bg-transparent border-0 shadow-none p-4  hover:shadow-md transition-all duration-300 ease-out">
+      <Card className="group relative flex overflow-hidden border border-border/40 bg-background/50 backdrop-blur-sm shadow-none p-4 transition-all duration-300 ease-out hover:border-border/80 hover:bg-muted/30 hover:shadow-lg hover:shadow-primary/5">
+        {/* Gradient accent left border */}
+        <div className="absolute left-0 top-0 h-full w-[3px] bg-gradient-to-b from-blue-500 via-cyan-400 to-blue-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
         <div className="flex-none">
-          <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
+          <Avatar className="border border-border/50 size-12 m-auto bg-muted-background dark:bg-foreground ring-2 ring-transparent transition-all duration-300 group-hover:ring-primary/20">
             <AvatarImage
               src={logoUrl}
               alt={altText}
@@ -60,20 +63,6 @@ export const ResumeCard = ({
             <div className="flex items-center justify-between gap-x-4 text-base">
               <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm">
                 {title}
-                {/* {badges && (
-                  <span className="inline-flex gap-x-2">
-                    {badges.map((badge, index) => (
-                      <Badge
-                        variant="secondary"
-                        
-                        className="align-middle text-xs"
-                        key={index}
-                      >
-                        {badge}
-                      </Badge>
-                  ))}
-                  </span>
-                )} */}
                 <ChevronRightIcon
                   className={cn(
                     "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
@@ -85,21 +74,24 @@ export const ResumeCard = ({
                 {period}
               </div>
             </div>
-            {subtitle && <div className="font-sans text-xs">{subtitle}</div>}
+            {subtitle && (
+              <div className="font-sans text-xs text-muted-foreground">
+                {subtitle}
+              </div>
+            )}
           </CardHeader>
           {description && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{
                 opacity: isExpanded ? 1 : 0,
-
                 height: isExpanded ? "auto" : 0,
               }}
               transition={{
                 duration: 0.7,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="mt-2 text-xs sm:text-sm"
+              className="mt-2 text-xs sm:text-sm text-muted-foreground"
             >
               {description}
             </motion.div>
