@@ -1,4 +1,5 @@
 import React from "react";
+import { SpecialText } from "./special-text";
 
 interface LandingPageProps {
   title?: string;
@@ -34,7 +35,7 @@ export function HeroSection({
         {avatarComponent && <div className="mb-2">{avatarComponent}</div>}
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] tracking-tight">
-          {title}
+          <SpecialText>{title}</SpecialText>
         </h1>
 
         <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-normal max-w-xl">

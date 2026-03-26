@@ -1,21 +1,16 @@
-import { CertificationCard } from "@/components/certifications-card";
 import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { ResumeCard } from "@/components/resume-card";
 import { ProjectGridWithModal } from "@/components/ui/project-grid-with-modal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { HeroSection } from "@/components/ui/hero-with-product-mockup";
 import ButtonWithIcon from "@/components/ui/button-with-icon";
 import HyperTextParagraph from "@/components/ui/hyper-text-with-decryption";
 import { Skills } from "@/components/ui/skills-showcase";
 import { UniqueAccordion } from "@/components/ui/interactive-accordion";
-import { GithubActivity } from "@/components/ui/github-activity";
 import { ContactSection } from "@/components/ui/contact-section";
+import { InteractiveHoverLinks } from "@/components/ui/interactive-hover-links-icon";
 import { Github, Linkedin } from "lucide-react";
 import { DATA } from "@/data/resume";
-import Link from "next/link";
-import Markdown from "react-markdown";
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
@@ -140,6 +135,15 @@ export default function Page() {
           </BlurFade>
         </div>
       </section>
+
+      <section id="daily">
+        <div className="space-y-12 w-full py-12">
+          <BlurFade delay={BLUR_FADE_DELAY * 10.2}>
+            <InteractiveHoverLinks />
+          </BlurFade>
+        </div>
+      </section>
+
       {/* <section id="github">
         <BlurFade delay={BLUR_FADE_DELAY * 10.5}>
           <GithubActivity
