@@ -21,7 +21,7 @@ export const Circle = ({
       animate={{ opacity: 1 }}
       transition={{ delay: (idx ?? 0) * 0.1, duration: 0.2 }}
       className={twMerge(
-        "absolute inset-0 left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full border border-neutral-200 dark:border-neutral-200",
+        "absolute inset-0 left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full border border-neutral-400 dark:border-neutral-600",
         className,
       )}
     >
@@ -61,7 +61,7 @@ export const Radar = ({ className }: { className?: string }) => {
           style={{
             height: `${(idx + 1) * 5}rem`,
             width: `${(idx + 1) * 5}rem`,
-            border: `1px solid rgba(71, 85, 105, ${1 - (idx + 1) * 0.1})`,
+            opacity: 1 - (idx + 1) * 0.1,
           }}
           key={`circle-${idx}`}
           idx={idx}
