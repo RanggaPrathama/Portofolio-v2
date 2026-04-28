@@ -13,8 +13,8 @@ import {
 
 export const INTERACTIVE_LINKS = [
   {
-    heading: "Ngoding",
-    subheading: "Menulis kode dan memecahkan bug setiap hari",
+    heading: "Coding",
+    subheading: "Tinkering with side projects, fighting bugs, and building cool stuff.",
     imgSrc:
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
     href: "#",
@@ -22,17 +22,17 @@ export const INTERACTIVE_LINKS = [
     accent: "from-sky-400 to-blue-600",
   },
   {
-    heading: "Membaca",
-    subheading: "Menambah wawasan lewat buku dan dokumentasi",
+    heading: "Community",
+    subheading: "Being a team player, organizing events, and connecting with people.",
     imgSrc:
-      "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=80",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80",
     href: "#",
     icon: BookOpen,
     accent: "from-violet-400 to-purple-600",
   },
   {
-    heading: "Olahraga",
-    subheading: "Menjaga kebugaran fisik dan relaksasi pikiran",
+    heading: "Working Out",
+    subheading: "Getting a good sweat in so my posture doesn't completely fail me.",
     imgSrc:
       "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
     href: "#",
@@ -40,8 +40,8 @@ export const INTERACTIVE_LINKS = [
     accent: "from-emerald-400 to-green-600",
   },
   {
-    heading: "Eksplorasi",
-    subheading: "Mencoba teknologi baru atau sekadar berjalan-jalan",
+    heading: "Exploring",
+    subheading: "Checking out new tech stacks or just stepping out for some fresh air.",
     imgSrc:
       "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
     href: "#",
@@ -49,8 +49,8 @@ export const INTERACTIVE_LINKS = [
     accent: "from-amber-400 to-orange-600",
   },
   {
-    heading: "Kopi Break",
-    subheading: "Titik temu inspirasi dari secangkir kopi",
+    heading: "Coffee Runs",
+    subheading: "Fueling up on caffeine while brainstorming the next big idea.",
     imgSrc:
       "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80",
     href: "#",
@@ -74,10 +74,10 @@ export function InteractiveHoverLinks({
             Daily Life
           </div>
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-            Pengalaman Harian
+            Beyond the Screen
           </h2>
           <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Aktivitas sehari-hari yang membentuk kebiasaan dan kreativitas saya.
+            When I&apos;m not staring at terminal logs, here are a few things I do to keep my sanity intact.
           </p>
         </div>
       </div>
@@ -145,17 +145,17 @@ function InteractiveLink({
       }}
       initial="initial"
       whileHover="whileHover"
-      className="group relative flex items-center gap-4 border-b border-border/40 py-5 transition-all duration-500 hover:border-border hover:bg-muted/5 md:py-7 rounded-lg px-2 sm:px-4"
+      className="group relative flex items-center gap-4 border-b border-border/40 py-5 transition-all duration-500 hover:border-blue-500/30 hover:bg-blue-500/[0.04] md:py-7 rounded-lg px-2 sm:px-4"
     >
       {/* Number + Icon */}
       <div className="relative z-10 flex items-center gap-3 sm:gap-4 shrink-0">
-        <span className="text-xs font-mono text-muted-foreground/50 w-5 text-right">
+        <span className="text-xs font-mono text-muted-foreground/50 w-5 text-right transition-colors duration-500 group-hover:text-blue-500/70">
           {String(index + 1).padStart(2, "0")}
         </span>
         <div
-          className={`flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${accent} opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110 shadow-lg`}
+          className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl border border-border/50 bg-secondary/30 transition-all duration-500 group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:to-blue-500 group-hover:border-blue-500/60 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
         >
-          <Icon className="size-5 sm:size-6 text-white" />
+          <Icon className="size-5 sm:size-6 text-foreground/70 transition-colors duration-500 group-hover:text-white" />
         </div>
       </div>
 
@@ -171,7 +171,7 @@ function InteractiveLink({
             staggerChildren: 0.05,
             delayChildren: 0.15,
           }}
-          className="block text-xl sm:text-2xl md:text-3xl font-bold text-muted-foreground/80 transition-colors duration-500 group-hover:text-foreground"
+          className="block text-xl sm:text-2xl md:text-3xl font-bold text-muted-foreground/80 transition-colors duration-500 group-hover:text-blue-500 dark:group-hover:text-blue-400"
         >
           {heading.split("").map((l, i) => (
             <motion.span

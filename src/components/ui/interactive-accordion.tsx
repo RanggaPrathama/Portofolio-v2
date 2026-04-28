@@ -55,15 +55,15 @@ export function UniqueAccordion({ items }: UniqueAccordionProps) {
             variants={cardVariant}
             layout
             className={cn(
-              "relative rounded-xl border overflow-hidden transition-colors duration-300",
+              "relative rounded-xl border overflow-hidden transition-all duration-300",
               isActive
-                ? "border-blue-500/30 bg-blue-500/[0.03] dark:bg-blue-500/[0.05]"
-                : "border-border/40 bg-background/50 hover:border-border/60",
+                ? "border-blue-500/40 bg-blue-500/[0.04] shadow-[0_0_20px_rgba(59,130,246,0.1)]"
+                : "border-border/40 bg-background/50 hover:border-border/70 hover:bg-muted/10",
             )}
           >
             {/* Active indicator bar */}
             <motion.div
-              className="absolute top-0 left-0 bottom-0 w-[3px] bg-gradient-to-b from-blue-500 to-cyan-400 rounded-l-xl"
+              className="absolute top-0 left-0 bottom-0 w-[3px] bg-gradient-to-b from-indigo-500 via-blue-500 to-sky-400 rounded-l-xl shadow-[0_0_10px_rgba(59,130,246,0.5)]"
               initial={false}
               animate={{
                 opacity: isActive ? 1 : 0,
@@ -90,8 +90,8 @@ export function UniqueAccordion({ items }: UniqueAccordionProps) {
                   {item.image ? (
                     <div
                       className={cn(
-                        "w-11 h-11 rounded-xl overflow-hidden border-2 transition-colors duration-300",
-                        isActive ? "border-blue-500/50" : "border-border/50",
+                        "w-11 h-11 rounded-xl overflow-hidden border-2 transition-all duration-300",
+                        isActive ? "border-blue-500/60 shadow-[0_0_10px_rgba(59,130,246,0.3)]" : "border-border/50",
                       )}
                     >
                       <Image
@@ -107,7 +107,7 @@ export function UniqueAccordion({ items }: UniqueAccordionProps) {
                       className={cn(
                         "w-11 h-11 rounded-xl flex items-center justify-center text-sm font-bold transition-all duration-300",
                         isActive
-                          ? "bg-blue-500 text-white"
+                          ? "bg-gradient-to-br from-indigo-500 to-blue-500 text-white shadow-[0_0_10px_rgba(59,130,246,0.3)]"
                           : "bg-muted/50 text-muted-foreground",
                       )}
                     >
@@ -136,9 +136,9 @@ export function UniqueAccordion({ items }: UniqueAccordionProps) {
                 {/* Toggle icon */}
                 <motion.div
                   className={cn(
-                    "flex items-center justify-center w-8 h-8 rounded-lg transition-colors duration-300",
+                    "flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-300",
                     isActive
-                      ? "bg-blue-500/10 text-blue-500"
+                      ? "bg-blue-500/15 text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.2)]"
                       : "bg-muted/30 text-muted-foreground",
                   )}
                   animate={{ rotate: isActive ? 45 : 0 }}

@@ -20,7 +20,7 @@ export default function Page() {
         <div className="mx-auto w-full space-y-12 mb-6 ">
           <BlurFade delay={BLUR_FADE_DELAY}>
             <HeroSection
-              title={`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
+              title={`Hi, I'm ${DATA.name.split(" ")[0]}👋`}
               description={DATA.description}
               avatarComponent={
                 <div className="relative group">
@@ -136,14 +136,6 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="daily">
-        <div className="space-y-12 w-full py-12">
-          <BlurFade delay={BLUR_FADE_DELAY * 10.2}>
-            <InteractiveHoverLinks />
-          </BlurFade>
-        </div>
-      </section>
-
       {/* <section id="github">
         <BlurFade delay={BLUR_FADE_DELAY * 10.5}>
           <GithubActivity
@@ -215,6 +207,15 @@ export default function Page() {
           </BlurFade>
         </div>
       </section>
+
+     <section id="daily">
+        <div className="space-y-12 w-full py-12">
+          <BlurFade delay={BLUR_FADE_DELAY * 10.2}>
+            <InteractiveHoverLinks />
+          </BlurFade>
+        </div>
+      </section>
+
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 16}>
           <ContactSection
