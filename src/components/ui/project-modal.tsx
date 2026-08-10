@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { ImageSlider } from "@/components/ui/image-slider";
 import Markdown from "react-markdown";
 import { useEffect } from "react";
 
@@ -17,6 +18,7 @@ interface ProjectModalProps {
     dates: string;
     tags: readonly string[];
     image?: string;
+    images?: readonly string[];
     video?: string;
     href?: string;
     links?: readonly {
@@ -51,10 +53,17 @@ export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
 
   if (!project) return null;
 
+  const images =
+    project.images && project.images.length > 0
+      ? project.images
+      : project.image
+        ? [project.image]
+        : [];
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+        <div className="fixed inset-0 z-[100] !m-0 flex items-center justify-center p-4 sm:p-6">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -82,7 +91,7 @@ export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
             </button>
 
             {/* Image/Video */}
-            {(project.image || project.video) && (
+            {(images.length > 0 || project.video) && (
               <div className="relative w-full aspect-video overflow-hidden rounded-t-2xl">
                 {project.video ? (
                   <video
@@ -93,16 +102,18 @@ export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
                     playsInline
                     className="w-full h-full object-cover"
                   />
-                ) : project.image ? (
+                ) : images.length > 1 ? (
+                  <ImageSlider images={images} alt={project.title} />
+                ) : (
                   <Image
-                    src={project.image}
+                    src={images[0]}
                     alt={project.title}
-                    width={800}
-                    height={450}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 512px) 100vw, 512px"
+                    className="object-cover object-top"
                   />
-                ) : null}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+                )}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
               </div>
             )}
 

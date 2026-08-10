@@ -20,6 +20,7 @@ interface Props {
   tags: readonly string[];
   link?: string;
   image?: string;
+  images?: readonly string[];
   video?: string;
   links?: readonly {
     icon: React.ReactNode;
@@ -38,11 +39,14 @@ export function ProjectCard({
   tags,
   link,
   image,
+  images,
   video,
   links,
   className,
   onClick,
 }: Props) {
+  const src = images?.[0] ?? image;
+
   return (
     <Card
       className={
@@ -73,10 +77,10 @@ export function ProjectCard({
             </div>
           </div>
         )}
-        {image && (
+        {src && (
           <div className="relative overflow-hidden">
             <Image
-              src={image}
+              src={src}
               alt={title}
               width={500}
               height={300}

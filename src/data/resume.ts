@@ -72,14 +72,26 @@ export const DATA = {
 
   work: [
     {
+      company: "PT Qlcom Solusi Bisnis",
+      href: "",
+      badges: ["Full-time"],
+      location: "Surabaya, Indonesia",
+      title: "Full-Stack Developer",
+      logoUrl: "/qlcom.jpeg",
+      start: "Feb 2026",
+      end: "Jul 2026",
+      description:
+        "Spearheaded technical coordination to build a scalable ERP solution, developing comprehensive modules for Purchasing, Inventory, Marketing, and Asset Management. Engineered a scalable full-stack architecture utilizing Express.js and Nuxt.js",
+    },
+    {
       company: "ERA REAL ESTATE",
       href: "",
       badges: ["Internship"],
       location: "Indonesia",
       title: "Backend & AI Engineer Intern",
       logoUrl: "/logoera.png",
-      start: "2025",
-      end: "",
+      start: "Aug 2025",
+      end: "Dec 2025",
       description:
         "Developed and maintained RESTful APIs for Single Sign-On (SSO) integration using Keycloak. Built and optimized backend APIs for the Human Resource Information System (HRIS). Designed and implemented AI-powered services based on Large Language Models (LLMs) to enable intelligent features and workflow automation.",
     },
@@ -90,10 +102,10 @@ export const DATA = {
       location: "Surabaya, Indonesia",
       title: "Information Systems & Digitalization Intern",
       logoUrl: "/unair.png",
-      start: "2024",
-      end: "2025",
+      start: "Jul 2024",
+      end: "Jun 2025",
       description:
-        "Contributed to the modification and improvement of the campus mobile API infrastructure. Supported the development of digital systems for independent internship programs, ensuring reliability and scalability of internal services.",
+        "Spearheaded the development of 'Kampus Kita Mobile' utilizing Flutter. Engineered critical application features including a real-time QR Code attendance system, student academic modules, and a dynamic adaptive CV generation interface, while optimizing the underlying mobile API infrastructure.",
     },
     {
       company: "Airlangga University DIPP",
@@ -116,11 +128,24 @@ export const DATA = {
       degree: "Bachelor's Degree in Informatics Engineering",
       logoUrl: "/unair.png",
       start: "2022",
-      end: "Present",
+      end: "2026",
+      gpa: "3.8/4.0",
     },
   ],
 
   projects: [
+    {
+      title: "Enterprise Resource Planning (ERP) - Hutomo Group",
+      href: "",
+      dates: "2026",
+      active: true,
+      description:
+        "Engineered a scalable full-stack Enterprise Resource Planning (ERP) system tailored for Hutomo Group to streamline complex corporate workflows. Spearheaded the development of comprehensive modules encompassing Purchasing, Inventory, Marketing, and Asset Management.",
+      technologies: ["Express.js", "Nuxt.js", "Node.js", "PM2", "PostgreSQL"],
+      links: [],
+      images: ["/erp-1.png", "/erp-2.png"],
+      video: "",
+    },
     {
       title: "SIMEDI (Inventory Management Information System)",
       href: "",
@@ -130,7 +155,7 @@ export const DATA = {
         "Contributed to a strategic digital transformation initiative through the development of SIMEDI, a tailored inventory management information system for PERUMDA Perkebunan Kahyangan, Jember. The application integrates end-to-end inventory processes, including stock tracking, logistics distribution, and real-time reporting, into a single efficient and user-centric platform. This project improves operational efficiency while promoting transparency and accountability in logistics governance within a regional state-owned enterprise (BUMD) environment.",
       technologies: ["Laravel", "Livewire", "MySQL"],
       links: [],
-      image: "/simedi.png",
+      images: ["/simedi.png"],
       video: "",
     },
     {
@@ -143,6 +168,7 @@ export const DATA = {
       technologies: ["Laravel", "Filament", "PostgreSQL"],
       links: [],
       image: "/tbcare.png",
+      images: [],
       video: "",
     },
     {
@@ -155,6 +181,7 @@ export const DATA = {
       technologies: ["Laravel", "Blade Templating", "Alpine.js", "PostgreSQL"],
       links: [],
       image: "/iuris.png",
+      images: [],
       video: "",
     },
 
@@ -168,6 +195,7 @@ export const DATA = {
       technologies: ["Flutter", "Dart"],
       links: [],
       image: "/kampus-kita.jpeg",
+      images: [],
       video: "",
     },
     {
@@ -185,7 +213,7 @@ export const DATA = {
         "Keycloak",
       ],
       links: [],
-      image: "/hris-backend.png",
+      images: ["/hris-backend.png", "/hris-backend-2.png"],
       video: "",
     },
     {
@@ -198,6 +226,7 @@ export const DATA = {
       technologies: ["Python", "FastAPI", "LLMs (Gemini Pro)", "PaddleOCR"],
       links: [],
       image: "/ai-service.png",
+      images: [],
       video: "",
     },
   ],

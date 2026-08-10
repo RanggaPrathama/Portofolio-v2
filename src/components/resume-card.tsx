@@ -1,15 +1,15 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import BlurFade from "./magicui/blur-fade";
 
-interface ResumeCardProps {
+interface ResumeCardItem {
   logoUrl: string;
   altText: string;
   title: string;
@@ -19,16 +19,25 @@ interface ResumeCardProps {
   period: string;
   description?: string;
 }
-export const ResumeCard = ({
-  logoUrl,
-  altText,
-  title,
-  subtitle,
-  href,
-  badges,
-  period,
-  description,
-}: ResumeCardProps) => {
+
+interface ResumeCardProps {
+  items: ResumeCardItem[];
+}
+
+export const ResumeCard = ({ items }: ResumeCardProps) => {
+  return (
+    <div className="flex flex-col gap-3">
+      {items.map((item, index) => (
+        <BlurFade key={index} delay={0.1 * index}>
+          <ResumeItem key={index} item={item} />
+        </BlurFade>
+      ))}
+    </div>
+  );
+};
+
+const ResumeItem = ({ item }: { item: ResumeCardItem }) => {
+  const { logoUrl, altText, title, subtitle, href, period, description } = item;
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -46,7 +55,12 @@ export const ResumeCard = ({
     >
       <Card className="group relative flex overflow-hidden border border-border/40 bg-background/50 backdrop-blur-sm shadow-none p-4 transition-all duration-300 ease-out hover:border-border/80 hover:bg-muted/30 hover:shadow-lg hover:shadow-primary/5">
         {/* Gradient accent left border */}
-        <div className="absolute left-0 top-0 h-full w-[3px] bg-gradient-to-b from-blue-500 via-cyan-400 to-blue-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div
+          className={cn(
+            "absolute left-0 top-0 h-full w-[3px] bg-gradient-to-b from-blue-500 via-cyan-400 to-blue-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+            isExpanded && "opacity-100",
+          )}
+        />
 
         <div className="flex-none">
           <Avatar className="border border-border/50 size-12 m-auto bg-muted-background dark:bg-foreground ring-2 ring-transparent transition-all duration-300 group-hover:ring-primary/20">
@@ -63,12 +77,15 @@ export const ResumeCard = ({
             <div className="flex items-center justify-between gap-x-4 text-base">
               <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm">
                 {title}
-                <ChevronRightIcon
-                  className={cn(
-                    "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
-                    isExpanded ? "rotate-90" : "rotate-0"
-                  )}
-                />
+                {/* 2. Opsional: Icon hanya tampil kalau item tersebut punya deskripsi */}
+                {description && (
+                  <ChevronRightIcon
+                    className={cn(
+                      "size-4 transition-transform duration-300 ease-out ml-1",
+                      isExpanded ? "rotate-90" : "rotate-0",
+                    )}
+                  />
+                )}
               </h3>
               <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right">
                 {period}

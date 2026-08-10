@@ -11,6 +11,7 @@ interface ProjectItem {
   dates: string;
   technologies: readonly string[];
   image?: string;
+  images?: readonly string[];
   video?: string;
   href?: string;
   links?: readonly {
@@ -54,7 +55,7 @@ export function ProjectGridWithModal({
               description={project.description}
               dates={project.dates}
               tags={project.technologies}
-              image={project.image}
+              image={project.images?.[0] ?? project.image}
               video={project.video}
               links={project.links}
               onClick={() => openModal(project)}
@@ -73,6 +74,7 @@ export function ProjectGridWithModal({
                 dates: selectedProject.dates,
                 tags: selectedProject.technologies,
                 image: selectedProject.image,
+                images: selectedProject.images,
                 video: selectedProject.video,
                 href: selectedProject.href,
                 links: selectedProject.links,

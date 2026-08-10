@@ -8,6 +8,9 @@ import { Send, Bot, User, Loader2, Trash2 } from "lucide-react";
 import type { Messages } from "@/types/chatbot";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import Image from "next/image";
+import { DATA } from "@/data/resume";
+import { ImageSlider } from "@/components/ui/image-slider";
 
 const SUGGESTED_QUESTIONS = [
   "What are your main skills?",
@@ -17,6 +20,125 @@ const SUGGESTED_QUESTIONS = [
 ];
 
 const LOCAL_STORAGE_KEY = "chatbot_message_history";
+
+// Allowlist: hanya path gambar dari DATA.projects yang boleh render.
+// Bot = untrusted LLM → path/URL sembarang di-drop, ga pernah sampai next/image.
+const IMAGE_TO_PROJECT_IMAGES = new Map<string, string[]>();
+for (const p of DATA.projects) {
+  const imgs =
+    p.images.length > 0
+      ? [...p.images]
+      : "image" in p && p.image
+        ? [p.image]
+        : [];
+  for (const img of imgs) IMAGE_TO_PROJECT_IMAGES.set(img, imgs);
+}
+
+function MessageRenderer({ content }: { content: string }) {
+  return (
+    <ReactMarkdown
+      className="whitespace-pre-wrap break-words"
+      remarkPlugins={[remarkGfm]}
+      components={{
+        p: ({ children }) => {
+          // image paragraph → render as div (ImageSlider/Image adalah block)
+          const hasImg = [children]
+            .flat()
+            .some(
+              (c) =>
+                typeof c === "object" &&
+                c !== null &&
+                typeof (c as any)?.props?.src === "string",
+            );
+          if (hasImg) return <div className="my-2 last:mb-0">{children}</div>;
+          return <p className="mb-1 last:mb-0">{children}</p>;
+        },
+        ul: ({ children }) => (
+          <ul className="mb-1 ml-4 list-disc last:mb-0">
+            {children}
+          </ul>
+        ),
+        ol: ({ children }) => (
+          <ol className="mb-1 ml-4 list-decimal last:mb-0">
+            {children}
+          </ol>
+        ),
+        li: ({ children }) => (
+          <li className="mb-0.5">{children}</li>
+        ),
+        h1: ({ children }) => (
+          <h1 className="mb-1 font-bold">{children}</h1>
+        ),
+        h2: ({ children }) => (
+          <h2 className="mb-1 font-bold">{children}</h2>
+        ),
+        h3: ({ children }) => (
+          <h3 className="mb-1 font-semibold">{children}</h3>
+        ),
+        strong: ({ children }) => (
+          <strong className="font-semibold">{children}</strong>
+        ),
+        table: ({ children }) => (
+          <div className="my-2 w-full overflow-x-auto rounded-lg border border-border/40">
+            <table className="w-full text-left text-xs">
+              {children}
+            </table>
+          </div>
+        ),
+        thead: ({ children }) => (
+          <thead className="bg-muted/70 text-foreground/80">
+            {children}
+          </thead>
+        ),
+        tbody: ({ children }) => (
+          <tbody className="divide-y divide-border/30">
+            {children}
+          </tbody>
+        ),
+        tr: ({ children }) => (
+          <tr className="transition-colors hover:bg-muted/40">
+            {children}
+          </tr>
+        ),
+        th: ({ children }) => (
+          <th className="px-3 py-2 font-semibold">{children}</th>
+        ),
+        td: ({ children }) => (
+          <td className="px-3 py-2 align-top">{children}</td>
+        ),
+        img: ({ src, alt }) => {
+          if (!src) return null;
+          const projectImages = IMAGE_TO_PROJECT_IMAGES.get(src);
+          if (!projectImages) return null; // bukan allowlist → drop
+
+          if (projectImages.length > 1) {
+            return (
+              <span className="relative my-2 block aspect-video w-full overflow-hidden rounded-xl border border-border/40">
+                <ImageSlider
+                  images={projectImages}
+                  alt={alt ?? "Project screenshot"}
+                />
+              </span>
+            );
+          }
+          return (
+            <span className="relative my-2 block aspect-video w-full overflow-hidden rounded-xl border border-border/40">
+              <Image
+                src={src}
+                alt={alt ?? "Project screenshot"}
+                fill
+                sizes="(max-width: 512px) 100vw, 480px"
+                className="object-cover object-top"
+              />
+            </span>
+          );
+        },
+      }}
+    >
+      {content}
+    </ReactMarkdown>
+  );
+}
 
 export function ChatBot() {
   const [messages, setMessages] = useState<Messages[]>([]);
@@ -198,70 +320,7 @@ export function ChatBot() {
                     : "bg-muted/50 text-foreground",
                 )}
               >
-                <ReactMarkdown
-                  className="whitespace-pre-wrap break-words"
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    p: ({ children }) => (
-                      <p className="mb-1 last:mb-0">{children}</p>
-                    ),
-                    ul: ({ children }) => (
-                      <ul className="mb-1 ml-4 list-disc last:mb-0">
-                        {children}
-                      </ul>
-                    ),
-                    ol: ({ children }) => (
-                      <ol className="mb-1 ml-4 list-decimal last:mb-0">
-                        {children}
-                      </ol>
-                    ),
-                    li: ({ children }) => (
-                      <li className="mb-0.5">{children}</li>
-                    ),
-                    h1: ({ children }) => (
-                      <h1 className="mb-1 font-bold">{children}</h1>
-                    ),
-                    h2: ({ children }) => (
-                      <h2 className="mb-1 font-bold">{children}</h2>
-                    ),
-                    h3: ({ children }) => (
-                      <h3 className="mb-1 font-semibold">{children}</h3>
-                    ),
-                    strong: ({ children }) => (
-                      <strong className="font-semibold">{children}</strong>
-                    ),
-                    table: ({ children }) => (
-                      <div className="my-2 w-full overflow-x-auto rounded-lg border border-border/40">
-                        <table className="w-full text-left text-xs">
-                          {children}
-                        </table>
-                      </div>
-                    ),
-                    thead: ({ children }) => (
-                      <thead className="bg-muted/70 text-foreground/80">
-                        {children}
-                      </thead>
-                    ),
-                    tbody: ({ children }) => (
-                      <tbody className="divide-y divide-border/30">
-                        {children}
-                      </tbody>
-                    ),
-                    tr: ({ children }) => (
-                      <tr className="transition-colors hover:bg-muted/40">
-                        {children}
-                      </tr>
-                    ),
-                    th: ({ children }) => (
-                      <th className="px-3 py-2 font-semibold">{children}</th>
-                    ),
-                    td: ({ children }) => (
-                      <td className="px-3 py-2 align-top">{children}</td>
-                    ),
-                  }}
-                >
-                  {message.content}
-                </ReactMarkdown>
+                <MessageRenderer content={message.content} />
                 {message.role === "assistant" &&
                   message.content === "" &&
                   isLoading && (
@@ -341,35 +400,4 @@ export function ChatBot() {
       </div>
     </div>
   );
-}
-
-// Simulated response - replace with actual AI API
-function getSimulatedResponse(question: string): string {
-  const q = question.toLowerCase();
-
-  if (q.includes("skill") || q.includes("technology") || q.includes("tech")) {
-    return "I'm proficient in various technologies including:\n\n• **Frontend**: React, Next.js, Vue.js, Tailwind CSS\n• **Backend**: Go, Node.js, Laravel, Express.js\n• **Database**: PostgreSQL, MySQL\n• **AI/ML**: Python, FastAPI, LLMs\n• **DevOps**: Docker\n\nI'm always learning new technologies to stay up-to-date!";
-  }
-
-  if (q.includes("project")) {
-    return "I've worked on several interesting projects:\n\n1. **SIMEDI** - Inventory Management System for PERUMDA Perkebunan Kahyangan\n2. **TBCARE** - Tuberculosis Care Monitoring System\n3. **IURIS** - Faculty Administrative Information System\n4. **Kampus Kita Mobile** - Mobile app for UNAIR students\n5. **HRIS Backend API** - HR system for Ministry of Defense\n6. **AI Service for HRIS** - LLM-powered analytics service\n\nWant to know more about any specific project?";
-  }
-
-  if (q.includes("experience") || q.includes("work")) {
-    return "Here's my professional experience:\n\n• **ERA Real Estate** (2025 - Present)\n  Backend & AI Engineer Intern\n  Working on SSO integration and AI-powered services\n\n• **Universitas Airlangga** (2024 - 2025)\n  Information Systems & Digitalization Intern\n  Campus mobile API development\n\n• **Universitas Airlangga** (2022 - 2023)\n  Innovation & Educational Development Intern\n  Academic data management";
-  }
-
-  if (
-    q.includes("education") ||
-    q.includes("study") ||
-    q.includes("university")
-  ) {
-    return "I'm currently pursuing my **Bachelor's Degree in Informatics Engineering** at **Universitas Airlangga** (UNAIR), Surabaya, Indonesia. Started in 2021 and still ongoing! 🎓";
-  }
-
-  if (q.includes("contact") || q.includes("reach") || q.includes("email")) {
-    return "You can reach me through:\n\n📧 **Email**: ranggaprathama9@gmail.com\n💼 **LinkedIn**: linkedin.com/in/rangga-prathama-05a066291\n🐙 **GitHub**: github.com/RanggaPrathama\n\nFeel free to connect!";
-  }
-
-  return "That's a great question! I'm here to help you learn more about Rangga's projects, skills, and experience. Feel free to ask about:\n\n• Technical skills & technologies\n• Projects and portfolio\n• Work experience\n• Education background\n• How to get in contact\n\nWhat would you like to know?";
 }

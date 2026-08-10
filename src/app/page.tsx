@@ -67,26 +67,20 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
             <h2 className="text-xl font-bold">Experience</h2>
           </BlurFade>
-          {DATA.work.map((work, id) => (
-            <BlurFade
-              key={work.company}
-              delay={BLUR_FADE_DELAY * 6 + id * 0.05}
-            >
-              <ResumeCard
-                key={work.company}
-                logoUrl={work.logoUrl}
-                altText={work.company}
-                title={work.company}
-                subtitle={work.title}
-                href={work.href}
-                badges={work.badges}
-                period={`${work.start}  ${
-                  work.end == "" ? "" : " - " + work.end
-                }`}
-                description={work.description}
-              />
-            </BlurFade>
-          ))}
+
+          <ResumeCard
+            items={DATA.work.map((work, i) => ({
+              key: work.company,
+              logoUrl: work.logoUrl,
+              altText: work.company,
+              title: work.company,
+              subtitle: work.title,
+              href: work.href,
+              badges: work.badges,
+              period: `${work.start}  - ${work.end || "Present"}`,
+              description: work.description,
+            }))}
+          />
         </div>
       </section>
       <section id="education">
@@ -94,22 +88,18 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
             <h2 className="text-xl font-bold">Education</h2>
           </BlurFade>
-          {DATA.education.map((education, id) => (
-            <BlurFade
-              key={education.school}
-              delay={BLUR_FADE_DELAY * 8 + id * 0.05}
-            >
-              <ResumeCard
-                key={education.school}
-                href={education.href}
-                logoUrl={education.logoUrl}
-                altText={education.school}
-                title={education.school}
-                subtitle={education.degree}
-                period={`${education.start} - ${education.end}`}
-              />
-            </BlurFade>
-          ))}
+
+          <ResumeCard
+            items={DATA.education.map((education, i) => ({
+              key: education.school,
+              href: education.href,
+              logoUrl: education.logoUrl,
+              altText: education.school,
+              title: education.school,
+              subtitle: `${education.degree} - GPA: ${education.gpa}`,
+              period: `${education.start} - ${education.end}`,
+            }))}
+          />
         </div>
       </section>
       <section id="skills">
@@ -121,15 +111,15 @@ export default function Page() {
             <Skills
               skills={[
                 { name: "React / Next.js", level: 90 },
-                { name: "Vue.js", level: 80 },
-                { name: "Node.js / Express", level: 85 },
-                { name: "Laravel", level: 88 },
-                { name: "Golang", level: 75 },
-                { name: "Python / FastAPI", level: 78 },
-                { name: "TypeScript", level: 85 },
-                { name: "PostgreSQL / MySQL", level: 82 },
-                { name: "Docker", level: 70 },
-                { name: "Machine Learning", level: 65 },
+                { name: "Vue.js", level: 90 },
+                { name: "Node.js / Express", level: 95 },
+                { name: "Laravel", level: 98 },
+                { name: "Golang", level: 85 },
+                { name: "Python / FastAPI", level: 88 },
+                { name: "TypeScript", level: 95 },
+                { name: "PostgreSQL / MySQL", level: 95 },
+                { name: "Docker", level: 85 },
+                { name: "Machine Learning", level: 90 },
               ]}
             />
           </BlurFade>
@@ -208,7 +198,7 @@ export default function Page() {
         </div>
       </section>
 
-     <section id="daily">
+      <section id="daily">
         <div className="space-y-12 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 10.2}>
             <InteractiveHoverLinks />
