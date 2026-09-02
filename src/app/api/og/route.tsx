@@ -6,7 +6,7 @@ import { ImageResponse } from "next/og";
 /**
  * Dynamic social-sharing card with a static fallback.
  * Primary path: render a branded 1200x630 card via `next/og` (ImageResponse)
- * Fallback: if the dynamic card fails to render, serve a static fallback image from `public/og.png`.
+ * Fallback: if the dynamic card fails to render, serve a static fallback image from `public/og.jpeg`.
  */
 export async function GET(request: Request) {
   try {
@@ -78,10 +78,10 @@ export async function GET(request: Request) {
       },
     );
   } catch {
-    const png = await readFile(join(process.cwd(), "public", "og.png"));
-    return new Response(new Uint8Array(png), {
+    const file = await readFile(join(process.cwd(), "public", "og.jpeg"));
+    return new Response(new Uint8Array(file), {
       headers: {
-        "Content-Type": "image/png",
+        "Content-Type": "image/jpeg",
         "Cache-Control": "public, max-age=31536000, immutable",
       },
     });
