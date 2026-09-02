@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og.png",
+        url: "/api/og",
         width: 1200,
         height: 630,
         alt: `${DATA.name} — ${DATA.description}`,
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     title: `${DATA.name}`,
     description: DATA.description,
     card: "summary_large_image",
-    images: ["/og.png"],
+    images: ["/api/og"],
   },
   verification: {
     google: "",
