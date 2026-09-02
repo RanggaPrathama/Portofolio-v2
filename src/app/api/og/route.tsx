@@ -22,54 +22,66 @@ export async function GET(request: Request) {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "flex-start",
           justifyContent: "center",
-          textAlign: "center",
-          backgroundColor: "#030712",
-          backgroundImage:
-            "radial-gradient(circle at 18% 20%, rgba(59,130,246,0.28) 0%, transparent 50%), radial-gradient(circle at 82% 80%, rgba(139,92,246,0.28) 0%, transparent 50%)",
+          backgroundColor: "#000000",
           fontFamily: "'Inter', sans-serif",
-          color: "#f9fafb",
-          padding: "48px 64px",
+          padding: "80px 120px",
         }}
       >
         <div
           style={{
             display: "flex",
-            fontSize: title.length > 30 ? 56 : 76, 
-            fontWeight: 700,
-            letterSpacing: "-0.02em",
+            alignItems: "center",
+            fontSize: 28,
+            fontWeight: 500,
+            color: "#a1a1aa",
+            letterSpacing: "0.05em",
+            marginBottom: 32,
+            textTransform: "uppercase",
+          }}
+        >
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            style={{ marginRight: 16 }}
+          >
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+          </svg>
+          rangga-dev.vercel.app
+        </div>
+
+        {/* Judul Utama */}
+        <div
+          style={{
+            display: "flex",
+            fontSize: title.length > 30 ? 64 : 84,
+            fontWeight: 800,
+            letterSpacing: "-0.04em",
             lineHeight: 1.1,
-            maxWidth: 900,
-            textAlign: "center",
+            color: "#ffffff",
+            marginBottom: 24,
           }}
         >
           {title}
         </div>
+
         <div
           style={{
             display: "flex",
-            marginTop: 24,
             fontSize: 36,
-            fontWeight: 600,
-            color: "#d1d5db",
-            maxWidth: 820,
-            textAlign: "center",
+            fontWeight: 400,
+            color: "#a1a1aa",
+            lineHeight: 1.5,
+            maxWidth: 900,
           }}
         >
           {description}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            marginTop: 48,
-            fontSize: 22,
-            fontWeight: 600,
-            color: "#60a5fa",
-            letterSpacing: "0.04em",
-          }}
-        >
-          RANGGA-DEV.VERCEL.APP
         </div>
       </div>,
       {
