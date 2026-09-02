@@ -15,6 +15,12 @@ export async function GET(request: Request) {
     const title = searchParams.get("title") || DATA.name;
     const description = searchParams.get("desc") || DATA.description;
 
+    // image
+    const imageBuffer = await readFile(
+      join(process.cwd(), "public", "og.jpeg"),
+    );
+    const base64Image = imageBuffer.toString("base64");
+    const imageSrc = `data:image/jpeg;base64,${base64Image}`;
     return new ImageResponse(
       <div
         style={{
@@ -22,66 +28,121 @@ export async function GET(request: Request) {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
-          justifyContent: "center",
-          backgroundColor: "#000000",
+          alignItems: "center",
+          backgroundColor: "#0a0a0a", // Warna hitam pekat
           fontFamily: "'Inter', sans-serif",
-          padding: "80px 120px",
         }}
       >
+        {/* Latar Belakang Grid SVG */}
+        <svg
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }}
+          width="1200"
+          height="630"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <pattern
+              id="grid"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="rgba(255,255,255,0.04)"
+                strokeWidth="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+
+        {/* Konten Utama */}
         <div
           style={{
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            fontSize: 28,
-            fontWeight: 500,
-            color: "#a1a1aa",
-            letterSpacing: "0.05em",
-            marginBottom: 32,
-            textTransform: "uppercase",
+            marginTop: 48,
+            width: "100%",
           }}
         >
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            style={{ marginRight: 16 }}
+          {/* Badge Pill di Atas */}
+          <div
+            style={{
+              display: "flex",
+              border: "1px solid rgba(255,255,255,0.2)",
+              borderRadius: 9999, // Membuat bentuk kapsul
+              padding: "6px 24px",
+              color: "#e4e4e7",
+              fontSize: 20,
+              letterSpacing: "0.02em",
+            }}
           >
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-          </svg>
-          rangga-dev.vercel.app
-        </div>
+            rangga-dev.vercel.app
+          </div>
 
-        {/* Judul Utama */}
-        <div
-          style={{
-            display: "flex",
-            fontSize: title.length > 30 ? 64 : 84,
-            fontWeight: 800,
-            letterSpacing: "-0.04em",
-            lineHeight: 1.1,
-            color: "#ffffff",
-            marginBottom: 24,
-          }}
-        >
-          {title}
-        </div>
+          {/* Judul Dinamis */}
+          <div
+            style={{
+              display: "flex",
+              color: "#ffffff",
+              fontSize: title.length > 25 ? 48 : 56, // Mengecil otomatis jika judul panjang
+              fontWeight: 700,
+              marginTop: 20,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            {title}
+          </div>
 
-        <div
-          style={{
-            display: "flex",
-            fontSize: 36,
-            fontWeight: 400,
-            color: "#a1a1aa",
-            lineHeight: 1.5,
-            maxWidth: 900,
-          }}
-        >
-          {description}
+          {/* Deskripsi Dinamis */}
+          <div
+            style={{
+              display: "flex",
+              color: "#a1a1aa",
+              fontSize: 24,
+              fontWeight: 400,
+              marginTop: 12,
+              textAlign: "center",
+              maxWidth: 800,
+              lineHeight: 1.4,
+            }}
+          >
+            {description}
+          </div>
+
+          {/* Card Gambar */}
+          <div
+            style={{
+              display: "flex",
+              marginTop: 32,
+              width: 1040,
+              height: 400,
+              borderRadius: 16,
+              overflow: "hidden", // Memastikan gambar mengikuti border radius
+              border: "1px solid rgba(255,255,255,0.1)",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.6)",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imageSrc}
+              alt="Avatar Banner"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </div>
         </div>
       </div>,
       {
