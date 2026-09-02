@@ -1,10 +1,12 @@
 import { DATA } from "@/data/resume";
 import Cerebras from "@cerebras/cerebras_cloud_sdk";
 import type { Messages, ModelUse } from "@/types/chatbot";
+import OpenAI from 'openai';
 
-const ai = new Cerebras({
-  apiKey: process.env["API_KEY_LLM"],
-});
+const ai = new OpenAI({
+  baseURL: 'https://openrouter.ai/api/v1',
+  apiKey: process.env.API_KEY_LLM,
+})
 
 // System prompts
 function buildSystemPrompt(): string {
@@ -134,6 +136,9 @@ export async function POST(req: Request) {
         ? parseFloat(process.env["TEMPERATURE"])
         : 1,
       top_p: process.env["TOP_P"] ? parseFloat(process.env["TOP_P"]) : 1,
+      reasoning: {
+        enabled: process.env["REASONING"] ? process.env["REASONING"] === "true" : true
+      },
     };
 
     const completion = await ai.chat.completions.create({

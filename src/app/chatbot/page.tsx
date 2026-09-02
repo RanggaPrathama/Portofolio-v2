@@ -1,9 +1,12 @@
 import { ChatBot } from "@/components/chatbot";
 import BlurFade from "@/components/magicui/blur-fade";
 import { Badge } from "@/components/ui/badge";
-const metadata = {
-  title: "ChatBot",
-  description: "Chat with our AI-powered chatbot.",
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Chatbot",
+  description:
+    "Chat with Rangga Prathama's AI assistant. Ask about my projects, skills, experience, and what I can build for you.",
 };
 
 const ChatBotPage = async () => {

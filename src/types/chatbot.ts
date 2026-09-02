@@ -11,5 +11,6 @@ export interface ModelUse {
     max_completion_tokens: number;
     temperature: number;
     top_p: number;
+    reasoning: object;
 }
 
