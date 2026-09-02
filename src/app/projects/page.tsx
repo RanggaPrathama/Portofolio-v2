@@ -5,6 +5,24 @@ import { DATA } from "@/data/resume";
 export const metadata = {
   title: "Projects",
   description: "A showcase of my projects.",
+  // openGraph: {
+  //   title: "Projects | Rangga Prathama",
+  //   description: "A showcase of my projects.",
+  //   images: [
+  //     {
+  //       url: `/api/og?title=Projects&desc=A%20showcase%20of%20my%20projects.`,
+  //       width: 1200,
+  //       height: 630,
+  //       alt: "Rangga Prathama Projects",
+  //     },
+  //   ],
+  // },
+  openGraph: {
+    images: ["/api/og?title=Projects&desc=A%20showcase%20of%20my%20projects."],
+  },
+  twitter: {
+    images: ["/api/og?title=Projects&desc=A%20showcase%20of%20my%20projects."],
+  },
 };
 
 const BLUR_FADE_DELAY = 0.04;

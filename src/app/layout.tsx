@@ -65,10 +65,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: ["/api/og"],
   },
-  verification: {
-    google: "",
-    yandex: "",
-  },
 };
 
 // Structured data injected into <head> for rich snippets.

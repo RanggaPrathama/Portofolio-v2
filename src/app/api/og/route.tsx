@@ -8,8 +8,13 @@ import { ImageResponse } from "next/og";
  * Primary path: render a branded 1200x630 card via `next/og` (ImageResponse)
  * Fallback: if the dynamic card fails to render, serve a static fallback image from `public/og.png`.
  */
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+
+    const title = searchParams.get("title") || DATA.name;
+    const description = searchParams.get("desc") || DATA.description;
+
     return new ImageResponse(
       <div
         style={{
@@ -23,8 +28,7 @@ export async function GET() {
           backgroundColor: "#030712",
           backgroundImage:
             "radial-gradient(circle at 18% 20%, rgba(59,130,246,0.28) 0%, transparent 50%), radial-gradient(circle at 82% 80%, rgba(139,92,246,0.28) 0%, transparent 50%)",
-          fontFamily:
-            "'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+          fontFamily: "'Inter', sans-serif",
           color: "#f9fafb",
           padding: "48px 64px",
         }}
@@ -32,7 +36,7 @@ export async function GET() {
         <div
           style={{
             display: "flex",
-            fontSize: 76,
+            fontSize: title.length > 30 ? 56 : 76, 
             fontWeight: 700,
             letterSpacing: "-0.02em",
             lineHeight: 1.1,
@@ -40,7 +44,7 @@ export async function GET() {
             textAlign: "center",
           }}
         >
-          {DATA.name}
+          {title}
         </div>
         <div
           style={{
@@ -53,7 +57,7 @@ export async function GET() {
             textAlign: "center",
           }}
         >
-          {DATA.description}
+          {description}
         </div>
         <div
           style={{
@@ -68,7 +72,10 @@ export async function GET() {
           RANGGA-DEV.VERCEL.APP
         </div>
       </div>,
-      { width: 1200, height: 630 },
+      {
+        width: 1200,
+        height: 630,
+      },
     );
   } catch {
     const png = await readFile(join(process.cwd(), "public", "og.png"));
